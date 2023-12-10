@@ -1,6 +1,6 @@
 from planets import Planet, Tableau, Player, Coordinate, Planets
 
-tableau = Tableau(Coordinate(150, 150))
+tableau = Tableau(Coordinate(900, 900))
 players = [
     Player("Aaron"),
     Player("Peter"),

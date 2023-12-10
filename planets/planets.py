@@ -50,9 +50,9 @@ class PlanetSize(Enum):
     An enum representing the size of a planet.
     """
 
-    SMALL = 25
-    MEDIUM = 50
-    LARGE = 75
+    SMALL = 50
+    MEDIUM = 75
+    LARGE = 100
 
 
 def check_planet_size(planet_size: PlanetSize | list[PlanetSize]):
@@ -181,7 +181,7 @@ class Planets(object):
         tableau: Tableau,
         players: list[Player],
         number_of_planets: int = 10,
-        min_distance: int = 10,
+        min_distance: int = 150,
     ):
         self.tableau = tableau
         self.players = players
