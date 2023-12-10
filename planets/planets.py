@@ -20,22 +20,22 @@ class Area:
     A class for keeping track of an area within the game.
     """
 
-    bottom_left: Coordinate
-    upper_right: Coordinate
+    upper_left: Coordinate
+    bottom_right: Coordinate
 
 
 @dataclass
 class Tableau(Area):
     """
-    A class represeting the game board.  The bottom left coordinate is always (0, 0).  When
-    creating a new Tableau, only the upper right coordinate needs to be specified.  This
+    A class represeting the game board.  The upper left coordinate is always (0, 0).  When
+    creating a new Tableau, only the bottom right coordinate needs to be specified.  This
     effectively sets the playing space.
     """
 
-    def __init__(self: Self, upper_right: Coordinate):
+    def __init__(self: Self, bottom_right: Coordinate):
         # Fix the bottom left coordinate to (0, 0)
-        bottom_left = Coordinate(0, 0)
-        super().__init__(bottom_left, upper_right)
+        upper_left = Coordinate(0, 0)
+        super().__init__(upper_left, bottom_right)
 
 
 class PlanetSize(Enum):
@@ -81,12 +81,10 @@ def create_random_planet(
         # Create a planet with random coordinates
         coordinate = Coordinate(
             random.randint(
-                area.bottom_left.x + planet_size.value,
-                area.upper_right.x - planet_size.value,
+                area.upper_left.x + min_distance, area.bottom_right.x - min_distance
             ),
             random.randint(
-                area.bottom_left.y + planet_size.value,
-                area.upper_right.y - planet_size.value,
+                area.upper_left.y + min_distance, area.bottom_right.y - min_distance
             ),
         )
 
