@@ -50,9 +50,9 @@ class PlanetSize(Enum):
     An enum representing the size of a planet.
     """
 
-    SMALL = 5
-    MEDIUM = 10
-    LARGE = 15
+    SMALL = 25
+    MEDIUM = 50
+    LARGE = 75
 
 
 def check_planet_size(planet_size: PlanetSize | list[PlanetSize]):
@@ -142,20 +142,14 @@ class Planet(object):
         planet_size: PlanetSize,
         home_player: Optional[Player] = None,
     ):
-        if not (isinstance(planet_size, list)) and not isinstance(
-            planet_size, PlanetSize
-        ):
+        if not isinstance(planet_size, PlanetSize):
             raise ValueError(
                 "Invalid planet size. Must be a valid PlanetSize enum value."
             )
 
         self.coordinate = coordinate
 
-        # Pick a random planet size if a list is passed in, else use the given planet size
-        if isinstance(planet_size, list):
-            self.planet_size = random.choice(planet_size)
-        else:
-            self.planet_size = planet_size
+        self.planet_size = planet_size
         self.home_player = home_player
 
         if home_player:
