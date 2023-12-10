@@ -150,7 +150,12 @@ class Planet(object):
             )
 
         self.coordinate = coordinate
-        self.planet_size = planet_size
+
+        # Pick a random planet size if a list is passed in, else use the given planet size
+        if isinstance(planet_size, list):
+            self.planet_size = random.choice(planet_size)
+        else:
+            self.planet_size = planet_size
         self.home_player = home_player
 
         if home_player:
