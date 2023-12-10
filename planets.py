@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import random
-from enum import Enum, auto
-from typing import Self
+from enum import Enum
+from typing import Self, Optional
 
 
 @dataclass
@@ -47,6 +47,7 @@ def create_random_planet(
     min_distance: int,
     planet_size: PlanetSize | list[PlanetSize] = list(PlanetSize),
     collision_list: list["Planet"] = [],
+    home_player: Optional["Player"] = None,
 ):
     """
     Create random planet within the given area.
@@ -71,9 +72,9 @@ def create_random_planet(
             ),
         )
 
-        planet = Planet(coordinate, planet_size)
+        planet = Planet(coordinate, planet_size, home_player)
 
-    return Planet(coordinate, planet_size)
+    return planet
 
 
 def check_for_colision(
@@ -99,9 +100,17 @@ class Player(object):
     def set_home_planet(self: Self, planet: "Planet"):
         self.home_planet = planet
 
+    def __str__(self: Self):
+        return f"Player(name={self.name})"
+
 
 class Planet(object):
-    def __init__(self: Self, coordinate: Coordinate, planet_size: PlanetSize):
+    def __init__(
+        self: Self,
+        coordinate: Coordinate,
+        planet_size: PlanetSize,
+        home_player: Optional[Player] = None,
+    ):
         if not (isinstance(planet_size, list)) and not isinstance(
             planet_size, PlanetSize
         ):
@@ -111,13 +120,24 @@ class Planet(object):
 
         self.coordinate = coordinate
         self.planet_size = planet_size
-        self.owner = None
+        self.home_player = home_player
+
+        if home_player:
+            self.owner = home_player
+            home_player.set_home_planet(self)
+        else:
+            self.owner = None
 
     def set_owner(self: Self, player: Player):
         self.owner = player
 
     def __str__(self: Self):
-        return f"Planet(coordinate={self.coordinate}, planet_size={self.planet_size}))"
+        if self.home_player:
+            return f"Planet(coordinate={self.coordinate}, planet_size={self.planet_size}, home_player={self.home_player.name}))"
+        else:
+            return (
+                f"Planet(coordinate={self.coordinate}, planet_size={self.planet_size}))"
+            )
 
 
 class Planets(object):
@@ -136,12 +156,14 @@ class Planets(object):
 
         random.shuffle(self.players)
 
+        # Create home planets for each player
         for player in self.players:
-            player_planet = self.create_planet()
-            player.set_home_planet(player_planet)
-            player_planet.set_owner(player)
+            player_planet = self.create_planet(
+                planet_size=PlanetSize.MEDIUM, home_player=player
+            )
             self.player_planet_list.append(player_planet)
 
+        # Create the rest of the planets
         for i in range(number_of_planets):
             self.planet_list.append(self.create_planet())
 
@@ -149,13 +171,16 @@ class Planets(object):
         return self.player_planet_list + self.planet_list
 
     def create_planet(
-        self: Self, planet_size: PlanetSize | list[PlanetSize] = list(PlanetSize)
+        self: Self,
+        planet_size: PlanetSize | list[PlanetSize] = list(PlanetSize),
+        home_player: Optional[Player] = None,
     ):
         return create_random_planet(
             self.tableau,
             min_distance=self.min_distance,
             planet_size=planet_size,
             collision_list=self.get_all_planets(),
+            home_player=home_player,
         )
 
 
@@ -167,3 +192,14 @@ if __name__ == "__main__":
     ]
 
     p = Planets(tableau, players, 10)
+
+    print("Player planets:")
+    for planet in p.player_planet_list:
+        print(planet)
+
+    print("Non-player planets:")
+    for planet in p.planet_list:
+        print(planet)
+
+    print("Player 1's planet:")
+    print(players[0].home_planet)
