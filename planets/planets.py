@@ -88,10 +88,12 @@ def create_random_planet(
         # Create a planet with random coordinates
         coordinate = Coordinate(
             random.randint(
-                area.upper_left.x + min_distance, area.bottom_right.x - min_distance
+                area.upper_left.x + (planet_size.value / 2),
+                area.bottom_right.x - (planet_size.value / 2),
             ),
             random.randint(
-                area.upper_left.y + min_distance, area.bottom_right.y - min_distance
+                area.upper_left.y + (planet_size.value / 2),
+                area.bottom_right.y - (planet_size.value / 2),
             ),
         )
 
@@ -181,7 +183,7 @@ class Planets(object):
         tableau: Tableau,
         players: list[Player],
         number_of_planets: int = 10,
-        min_distance: int = 150,
+        min_distance: int = 5,
     ):
         self.tableau = tableau
         self.players = players
