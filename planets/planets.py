@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import random
 from enum import Enum
 from typing import Self, Optional
+from math import floor
 
 
 @dataclass
@@ -88,12 +89,12 @@ def create_random_planet(
         # Create a planet with random coordinates
         coordinate = Coordinate(
             random.randint(
-                area.upper_left.x + (planet_size.value / 2),
-                area.bottom_right.x - (planet_size.value / 2),
+                area.upper_left.x + floor(planet_size.value / 2),
+                area.bottom_right.x - floor(planet_size.value / 2),
             ),
             random.randint(
-                area.upper_left.y + (planet_size.value / 2),
-                area.bottom_right.y - (planet_size.value / 2),
+                area.upper_left.y + floor(planet_size.value / 2),
+                area.bottom_right.y - floor(planet_size.value / 2),
             ),
         )
 
