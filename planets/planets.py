@@ -159,7 +159,7 @@ class Planet(object):
         else:
             self.owner = None
 
-    def set_owner(self: Self, player: Player):
+    def set_owner(self: Self, player: Player) -> None:
         self.owner = player
 
     def __str__(self: Self):
@@ -203,14 +203,14 @@ class Planets(object):
         for i in range(number_of_planets):
             self.planet_list.append(self.create_planet())
 
-    def get_all_planets(self: Self):
+    def get_all_planets(self: Self) -> list[Planet]:
         return self.player_planet_list + self.planet_list
 
     def create_planet(
         self: Self,
         planet_size: PlanetSize | list[PlanetSize] = list(PlanetSize),
         home_player: Optional[Player] = None,
-    ):
+    ) -> None:
         return create_random_planet(
             self.tableau,
             min_distance=self.min_distance,
