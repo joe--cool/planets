@@ -6,18 +6,32 @@ from typing import Self, Optional
 
 @dataclass
 class Coordinate:
+    """
+    A class for keeping track of coordinates within the game.
+    """
+
     x: int
     y: int
 
 
 @dataclass
 class Area:
+    """
+    A class for keeping track of an area within the game.
+    """
+
     bottom_left: Coordinate
     upper_right: Coordinate
 
 
 @dataclass
 class Tableau(Area):
+    """
+    A class represeting the game board.  The bottom left coordinate is always (0, 0).  When
+    creating a new Tableau, only the upper right coordinate needs to be specified.  This
+    effectively sets the playing space.
+    """
+
     def __init__(self: Self, upper_right: Coordinate):
         # Fix the bottom left coordinate to (0, 0)
         bottom_left = Coordinate(0, 0)
@@ -25,6 +39,10 @@ class Tableau(Area):
 
 
 class PlanetSize(Enum):
+    """
+    An enum representing the size of a planet.
+    """
+
     SMALL = 5
     MEDIUM = 10
     LARGE = 15
@@ -94,6 +112,10 @@ def check_for_colision(
 
 
 class Player(object):
+    """
+    A class representing a player in the game.
+    """
+
     def __init__(self: Self, name: str):
         self.name = name
 
@@ -105,6 +127,10 @@ class Player(object):
 
 
 class Planet(object):
+    """
+    A class representing a planet in the game.
+    """
+
     def __init__(
         self: Self,
         coordinate: Coordinate,
@@ -141,6 +167,11 @@ class Planet(object):
 
 
 class Planets(object):
+    """
+    A class for creating and keeping track of all the planets in the game.  This is intended to be
+    the core state machine for the game.
+    """
+
     def __init__(
         self: Self,
         tableau: Tableau,
