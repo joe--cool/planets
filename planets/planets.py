@@ -37,6 +37,13 @@ class Tableau(Area):
         upper_left = Coordinate(0, 0)
         super().__init__(upper_left, bottom_right)
 
+    def get_size(self: Self) -> tuple[int, int]:
+        """
+        Returns a tuple of the size of the tableau.  Helpful for passing to
+        pygame.display.set_mode().
+        """
+        return (self.bottom_right.x, self.bottom_right.y)
+
 
 class PlanetSize(Enum):
     """
