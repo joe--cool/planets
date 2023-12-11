@@ -3,6 +3,9 @@ import random
 from enum import Enum
 from typing import Self, Optional
 from math import floor
+from reactivex import Observable, Observer, Subject
+from reactivex.subject import ReplaySubject, BehaviorSubject
+from uuid import uuid4
 
 
 @dataclass
@@ -85,7 +88,7 @@ def create_random_planet(
     if isinstance(planet_size, list):
         planet_size = random.choice(planet_size)
 
-    while planet is None or check_for_colision(planet, collision_list, min_distance):
+    while planet is None or check_for_collision(planet, collision_list, min_distance):
         # Create a planet with random coordinates
         coordinate = Coordinate(
             random.randint(
@@ -103,7 +106,7 @@ def create_random_planet(
     return planet
 
 
-def check_for_colision(
+def check_for_collision(
     planet: "Planet", collision_list: list["Planet"], min_distance: int
 ):
     """
@@ -139,6 +142,12 @@ class Planet(object):
     A class representing a planet in the game.
     """
 
+    def __str__(self: Self):
+        if self.home_player:
+            return f"Planet(id={self.id}, coordinate={self.coordinate}, planet_size={self.planet_size}, home_player={self.home_player.name}))"
+        else:
+            return f"Planet(id={self.id}, coordinate={self.coordinate}, planet_size={self.planet_size}))"
+
     def __init__(
         self: Self,
         coordinate: Coordinate,
@@ -151,6 +160,7 @@ class Planet(object):
             )
 
         self.coordinate = coordinate
+        self.id = uuid4()
 
         self.planet_size = planet_size
         self.home_player = home_player
@@ -161,16 +171,18 @@ class Planet(object):
         else:
             self.owner = None
 
+        # Should be last
+        self.planet_observable = BehaviorSubject(self)
+
     def set_owner(self: Self, player: Player) -> None:
         self.owner = player
+        self.planet_observable.on_next(self)
 
-    def __str__(self: Self):
-        if self.home_player:
-            return f"Planet(coordinate={self.coordinate}, planet_size={self.planet_size}, home_player={self.home_player.name}))"
+    def subscribe(self: Self, observer: any) -> None:
+        if isinstance(observer, Observer):
+            self.planet_observable.subscribe(observer)
         else:
-            return (
-                f"Planet(coordinate={self.coordinate}, planet_size={self.planet_size}))"
-            )
+            self.planet_observable.subscribe(Observer(observer))
 
 
 class Planets(object):
@@ -191,6 +203,7 @@ class Planets(object):
         self.min_distance = min_distance
         self.player_planet_list = []
         self.planet_list = []
+        self.all_planet_dict = {}
 
         random.shuffle(self.players)
 
@@ -208,18 +221,24 @@ class Planets(object):
     def get_all_planets(self: Self) -> list[Planet]:
         return self.player_planet_list + self.planet_list
 
+    def get_planet_by_id(self: Self, planet_id: uuid4) -> Planet:
+        return self.all_planet_dict[planet_id]
+
     def create_planet(
         self: Self,
         planet_size: PlanetSize | list[PlanetSize] = list(PlanetSize),
         home_player: Optional[Player] = None,
     ) -> None:
-        return create_random_planet(
+        planet = create_random_planet(
             self.tableau,
             min_distance=self.min_distance,
             planet_size=planet_size,
             collision_list=self.get_all_planets(),
             home_player=home_player,
         )
+        self.all_planet_dict[planet.id] = planet
+
+        return planet
 
 
 if __name__ == "__main__":

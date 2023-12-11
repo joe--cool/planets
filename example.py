@@ -8,13 +8,17 @@ players = [
 
 p = Planets(tableau, players, 10)
 
-print("Player planets:")
+print("\nPlayer planets:")
 for planet in p.player_planet_list:
     print(planet)
 
-print("Non-player planets:")
+print("\nNon-player planets:")
 for planet in p.planet_list:
     print(planet)
 
-print("Player 1's planet:")
-print(players[0].home_planet)
+print("\nTest Subscriptions:")
+for planet in p.get_all_planets():
+    planet.subscribe(lambda x: print(f"{x} - {x.owner}"))
+
+print("\nUpdate Onwership:")
+p.planet_list[0].set_owner(players[1])
