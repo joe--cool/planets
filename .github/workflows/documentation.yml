@@ -44,7 +44,9 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install sphinx sphinx_rtd_theme myst_parser
 
-      - run: mkdocs build
+      - name: Sphinx build
+        run: |
+          sphinx-build doc _build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
