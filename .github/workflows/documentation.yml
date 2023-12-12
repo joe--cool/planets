@@ -45,8 +45,7 @@ jobs:
         run: python3 -m pip install sphinx sphinx_rtd_theme
 
       - name: Sphinx build
-        run: |
-          sphinx-build -b html . docs
+        run: sphinx-build -M html docs/source/ docs/build/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -54,5 +53,5 @@ jobs:
         with:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./docs/build/html
           force_orphan: true
