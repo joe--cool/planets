@@ -1,1 +1,1 @@
-from planets.planets import Planet, Player, Planets, PlanetSize, Coordinate, Tableau
+from planets.planets import Coordinate, Planet, PlanetSize, Planets, Player, Tableau
