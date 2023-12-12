@@ -131,6 +131,9 @@ class Player(object):
         self.name = name
 
     def set_home_planet(self: Self, planet: "Planet"):
+        """
+        Set the home planet for the player.
+        """
         self.home_planet = planet
 
     def __str__(self: Self):
@@ -175,10 +178,17 @@ class Planet(object):
         self.planet_observable = BehaviorSubject(self)
 
     def set_owner(self: Self, player: Player) -> None:
+        """
+        Set the owner of the planet.
+        """
         self.owner = player
         self.planet_observable.on_next(self)
 
     def subscribe(self: Self, observer: any) -> None:
+        """
+        Subscribe to events of the planet.  The observer can be either an Observer or a function.
+        It will be called and passed the planet object whenever the planet changes states.
+        """
         if isinstance(observer, Observer):
             self.planet_observable.subscribe(observer)
         else:
@@ -219,9 +229,15 @@ class Planets(object):
             self.planet_list.append(self.create_planet())
 
     def get_all_planets(self: Self) -> list[Planet]:
+        """
+        Return a list of all the planets in the game.
+        """
         return self.player_planet_list + self.planet_list
 
     def get_planet_by_id(self: Self, planet_id: uuid4) -> Planet:
+        """
+        Return the planet with the given planet's id.
+        """
         return self.all_planet_dict[planet_id]
 
     def create_planet(
@@ -229,6 +245,9 @@ class Planets(object):
         planet_size: PlanetSize | list[PlanetSize] = list(PlanetSize),
         home_player: Optional[Player] = None,
     ) -> None:
+        """
+        Create a planet within the game.
+        """
         planet = create_random_planet(
             self.tableau,
             min_distance=self.min_distance,
