@@ -1,0 +1,4 @@
+-i https://pypi.org/simple
+pygame==2.5.2
+reactivex==4.0.4
+typing-extensions==4.9.0 ; python_version >= '3.8'
