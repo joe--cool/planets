@@ -42,11 +42,11 @@ jobs:
         run: python3 -m pip install -r ./requirements.txt
 
       - name: Install dependencies
-        run: python3 -m pip install sphinx sphinx_rtd_theme myst_parser
+        run: python3 -m pip install sphinx sphinx_rtd_theme
 
       - name: Sphinx build
         run: |
-          sphinx-build doc _build
+          sphinx-build -b html . docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -54,5 +54,5 @@ jobs:
         with:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
+          publish_dir: ./docs
           force_orphan: true
