@@ -38,8 +38,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Install dependencies
+      - name: Install requirements
         run: python3 -m pip install -r ./requirements.txt
+
+      - name: Install dependencies
+        run: python3 -m pip install sphinx sphinx_rtd_theme myst_parser
 
       - run: mkdocs build
 
@@ -47,5 +50,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
+          publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
+          force_orphan: true
