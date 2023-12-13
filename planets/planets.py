@@ -6,6 +6,7 @@ from math import floor
 from reactivex import Observable, Observer, Subject
 from reactivex.subject import ReplaySubject, BehaviorSubject
 from uuid import uuid4
+from reactivex import abc
 
 
 @dataclass
@@ -77,6 +78,7 @@ def create_random_planet(
     planet_size: PlanetSize | list[PlanetSize] = list(PlanetSize),
     collision_list: list["Planet"] = [],
     home_player: Optional["Player"] = None,
+    scheduler: abc.SchedulerBase = None,
 ):
     """
     Create random planet within the given area.
@@ -101,7 +103,7 @@ def create_random_planet(
             ),
         )
 
-        planet = Planet(coordinate, planet_size, home_player)
+        planet = Planet(coordinate, planet_size, home_player, scheduler=scheduler)
 
     return planet
 
@@ -156,6 +158,7 @@ class Planet(object):
         coordinate: Coordinate,
         planet_size: PlanetSize,
         home_player: Optional[Player] = None,
+        scheduler: abc.SchedulerBase = None,
     ):
         if not isinstance(planet_size, PlanetSize):
             raise ValueError(
@@ -174,6 +177,8 @@ class Planet(object):
         else:
             self.owner = None
 
+        self.scheduler = scheduler
+
         # Should be last
         self.planet_observable = BehaviorSubject(self)
 
@@ -189,10 +194,13 @@ class Planet(object):
         Subscribe to events of the planet.  The observer can be either an Observer or a function.
         It will be called and passed the planet object whenever the planet changes states.
         """
+
         if isinstance(observer, Observer):
-            self.planet_observable.subscribe(observer)
+            self.planet_observable.subscribe(observer, scheduler=self.scheduler)
         else:
-            self.planet_observable.subscribe(Observer(observer))
+            self.planet_observable.subscribe(
+                Observer(observer), scheduler=self.scheduler
+            )
 
 
 class Planets(object):
@@ -207,6 +215,7 @@ class Planets(object):
         players: list[Player],
         number_of_planets: int = 10,
         min_distance: int = 5,
+        scheduler: abc.SchedulerBase = None,
     ):
         self.tableau = tableau
         self.players = players
@@ -214,6 +223,7 @@ class Planets(object):
         self.player_planet_list = []
         self.planet_list = []
         self.all_planet_dict = {}
+        self.scheduler = scheduler
 
         random.shuffle(self.players)
 
@@ -254,6 +264,7 @@ class Planets(object):
             planet_size=planet_size,
             collision_list=self.get_all_planets(),
             home_player=home_player,
+            scheduler=self.scheduler,
         )
         self.all_planet_dict[planet.id] = planet
 
