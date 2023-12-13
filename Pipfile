@@ -10,6 +10,7 @@ reactivex = "*"
 [dev-packages]
 sphinx = "*"
 sphinx-rtd-theme = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.11"
