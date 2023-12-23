@@ -1,9 +1,13 @@
 from planets import Planet, Tableau, Player, Coordinate, Planets
 
 tableau = Tableau(Coordinate(900, 900))
+
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+
 players = [
-    Player("Aaron"),
-    Player("Peter"),
+    Player("Aaron", RED),
+    Player("Peter", BLUE),
 ]
 
 p = Planets(tableau, players, 10)
