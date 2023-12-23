@@ -129,8 +129,9 @@ class Player(object):
     A class representing a player in the game.
     """
 
-    def __init__(self: Self, name: str):
+    def __init__(self: Self, name: str, color: tuple[int, int, int]):
         self.name = name
+        self.color = color
 
     def set_home_planet(self: Self, planet: "Planet"):
         """
