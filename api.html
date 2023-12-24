@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API &#8212; planets  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to planets" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-planets">
+<span id="api"></span><h1>API<a class="headerlink" href="#module-planets" title="Link to this heading">¶</a></h1>
+<p>This part of the documentation covers all the interfaces of planets.</p>
+<section id="coordinate-objects">
+<h2>Coordinate Objects<a class="headerlink" href="#coordinate-objects" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="planets.Coordinate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">planets.</span></span><span class="sig-name descname"><span class="pre">Coordinate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#planets.Coordinate" title="Link to this definition">¶</a></dt>
+<dd><p>A class for keeping track of coordinates within the game.</p>
+</dd></dl>
+
+</section>
+<section id="planet-objects">
+<h2>Planet Objects<a class="headerlink" href="#planet-objects" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="planets.Planet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">planets.</span></span><span class="sig-name descname"><span class="pre">Planet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#planets.Coordinate" title="planets.planets.Coordinate"><span class="pre">Coordinate</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">planet_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#planets.PlanetSize" title="planets.planets.PlanetSize"><span class="pre">PlanetSize</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">home_player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#planets.Player" title="planets.planets.Player"><span class="pre">Player</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SchedulerBase</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#planets.Planet" title="Link to this definition">¶</a></dt>
+<dd><p>A class representing a planet in the game.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="planets.Planet.set_owner">
+<span class="sig-name descname"><span class="pre">set_owner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#planets.Player" title="planets.planets.Player"><span class="pre">Player</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#planets.Planet.set_owner" title="Link to this definition">¶</a></dt>
+<dd><p>Set the owner of the planet.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="planets.Planet.subscribe">
+<span class="sig-name descname"><span class="pre">subscribe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#planets.Planet.subscribe" title="Link to this definition">¶</a></dt>
+<dd><p>Subscribe to events of the planet.  The observer can be either an Observer or a function.
+It will be called and passed the planet object whenever the planet changes states.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="planetsize-objects">
+<h2>PlanetSize Objects<a class="headerlink" href="#planetsize-objects" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="planets.PlanetSize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">planets.</span></span><span class="sig-name descname"><span class="pre">PlanetSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#planets.PlanetSize" title="Link to this definition">¶</a></dt>
+<dd><p>An enum representing the size of a planet.</p>
+</dd></dl>
+
+</section>
+<section id="planets-objects">
+<h2>Planets Objects<a class="headerlink" href="#planets-objects" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="planets.Planets">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">planets.</span></span><span class="sig-name descname"><span class="pre">Planets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tableau</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#planets.Tableau" title="planets.planets.Tableau"><span class="pre">Tableau</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">players</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#planets.Player" title="planets.planets.Player"><span class="pre">Player</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_planets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SchedulerBase</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#planets.Planets" title="Link to this definition">¶</a></dt>
+<dd><p>A class for creating and keeping track of all the planets in the game.  This is intended to be
+the core state machine for the game.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="planets.Planets.create_planet">
+<span class="sig-name descname"><span class="pre">create_planet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#planets.PlanetSize" title="planets.planets.PlanetSize"><span class="pre">PlanetSize</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#planets.PlanetSize" title="planets.planets.PlanetSize"><span class="pre">PlanetSize</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[PlanetSize.SMALL,</span> <span class="pre">PlanetSize.MEDIUM,</span> <span class="pre">PlanetSize.LARGE]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">home_player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#planets.Player" title="planets.planets.Player"><span class="pre">Player</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#planets.Planets.create_planet" title="Link to this definition">¶</a></dt>
+<dd><p>Create a planet within the game.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="planets.Planets.get_all_planets">
+<span class="sig-name descname"><span class="pre">get_all_planets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#planets.Planet" title="planets.planets.Planet"><span class="pre">Planet</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#planets.Planets.get_all_planets" title="Link to this definition">¶</a></dt>
+<dd><p>Return a list of all the planets in the game.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="planets.Planets.get_planet_by_id">
+<span class="sig-name descname"><span class="pre">get_planet_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">uuid4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#planets.Planet" title="planets.planets.Planet"><span class="pre">Planet</span></a></span></span><a class="headerlink" href="#planets.Planets.get_planet_by_id" title="Link to this definition">¶</a></dt>
+<dd><p>Return the planet with the given planet’s id.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="player-objects">
+<h2>Player Objects<a class="headerlink" href="#player-objects" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="planets.Player">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">planets.</span></span><span class="sig-name descname"><span class="pre">Player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#planets.Player" title="Link to this definition">¶</a></dt>
+<dd><p>A class representing a player in the game.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="planets.Player.set_home_planet">
+<span class="sig-name descname"><span class="pre">set_home_planet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">planet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#planets.Planet" title="planets.planets.Planet"><span class="pre">Planet</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#planets.Player.set_home_planet" title="Link to this definition">¶</a></dt>
+<dd><p>Set the home planet for the player.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="tableau-objects">
+<h2>Tableau Objects<a class="headerlink" href="#tableau-objects" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="planets.Tableau">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">planets.</span></span><span class="sig-name descname"><span class="pre">Tableau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bottom_right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#planets.Coordinate" title="planets.planets.Coordinate"><span class="pre">Coordinate</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#planets.Tableau" title="Link to this definition">¶</a></dt>
+<dd><p>A class represeting the game board.  The upper left coordinate is always (0, 0).  When
+creating a new Tableau, only the bottom right coordinate needs to be specified.  This
+effectively sets the playing space.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="planets.Tableau.get_size">
+<span class="sig-name descname"><span class="pre">get_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#planets.Tableau.get_size" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a tuple of the size of the tableau.  Helpful for passing to
+pygame.display.set_mode().</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">planets</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#coordinate-objects">Coordinate Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#planet-objects">Planet Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#planetsize-objects">PlanetSize Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#planets-objects">Planets Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#player-objects">Player Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tableau-objects">Tableau Objects</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to planets</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Aaron Dillow.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
