@@ -219,7 +219,7 @@ class Planets(object):
         scheduler: abc.SchedulerBase = None,
     ):
         self.tableau = tableau
-        self.players = players
+        self.players = players.copy()
         self.min_distance = min_distance
         self.player_planet_list = []
         self.planet_list = []
